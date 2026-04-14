@@ -275,6 +275,15 @@ a:hover {
   background: transparent;
   padding: 0;
   color: inherit;
+  font-size: inherit;
+}
+
+/* Override site custom.css that inflates code sizes */
+.editor-content code,
+.editor-content pre,
+.editor-content .highlight pre,
+.editor-content .highlight pre code {
+  font-size: 1em;
 }
 
 .editor-content blockquote {
