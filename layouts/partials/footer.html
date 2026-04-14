@@ -7,9 +7,9 @@
   <div class="right">
     <label for="font-select">Font:</label>
     <select id="font-select" x-model="fontFamily" @change="setFont(fontFamily)">
+      <option>Inter</option>
       <option>JetBrains Mono</option>
       <option>Fira Code</option>
-      <option>Inter</option>
       <option>Roboto Mono</option>
     </select>
     <span>Ln {{ .WordCount | default 1 }}, Col 1</span>

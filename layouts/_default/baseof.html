@@ -22,12 +22,12 @@
     function vscodeApp() {
       return {
         sidebarOpen: true,
-        fontFamily: 'JetBrains Mono',
+        fontFamily: 'Inter',
         initApp() {
           const sb = this.getCookie('hugo_vscode_sidebar');
           this.sidebarOpen = sb === '' ? true : sb === '1';
           const f = this.getCookie('hugo_vscode_font');
-          this.fontFamily = f || 'JetBrains Mono';
+          this.fontFamily = f || 'Inter';
           this.setFont(this.fontFamily);
         },
         getCookie(name) {
