@@ -6,7 +6,7 @@
       {{ $currentPage := . }}
       {{ range .Site.Menus.main }}
       <li class="indent{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{ else if eq $currentPage.RelPermalink .URL }} active{{ end }}">
-        <a href="{{ .URL }}">{{ .Name }}</a>
+        <a href="{{ .URL | relURL }}">{{ .Name }}</a>
       </li>
       {{ end }}
       {{ range .Site.Sections }}
