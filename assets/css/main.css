@@ -563,6 +563,51 @@ a:hover {
   border-color: var(--ayu-accent);
 }
 
+/* Post previews on blog index */
+.post-preview {
+  background: var(--ayu-panel-bg);
+  border: 1px solid var(--ayu-border);
+  border-radius: 6px;
+  margin-bottom: 1.5em;
+  overflow: hidden;
+}
+
+.preview-header {
+  padding: 16px 18px 10px;
+  border-bottom: 1px solid var(--ayu-border);
+}
+
+.preview-header h3 {
+  margin: 0 0 8px;
+  font-size: 1.15em;
+}
+
+.preview-body {
+  padding: 14px 18px;
+}
+
+.preview-body p {
+  margin: 0;
+}
+
+.preview-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  background: var(--ayu-line);
+  border-top: 1px solid var(--ayu-border);
+  color: var(--ayu-fg);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.preview-footer:hover {
+  background: var(--ayu-selection-ui);
+  color: var(--ayu-accent);
+  text-decoration: none;
+}
+
 /* Taxonomy lists */
 .taxonomy-list {
   list-style: none;
