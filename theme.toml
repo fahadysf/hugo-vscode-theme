@@ -1,0 +1,13 @@
+name = "VSCode Ayu Dark"
+license = "MIT"
+licenselink = "https://github.com/fahadysf/hugo-vscode-theme/blob/main/LICENSE"
+description = "A Hugo theme that looks like Visual Studio Code with the Ayu Dark color palette. Uses Alpine.js for interactivity, with embedded self-contained assets and cookie-based state persistence."
+homepage = "https://github.com/fahadysf/hugo-vscode-theme"
+demosite = ""
+tags = ["blog", "dark", "vscode", "ayu", "alpinejs", "minimal"]
+features = ["vscode-ui", "ayu-dark", "alpinejs", "cookie-state", "font-switcher"]
+min_version = "0.124.0"
+
+[author]
+  name = "fahadysf"
+  homepage = "https://github.com/fahadysf"

@@ -1,0 +1,17 @@
+<aside class="app-sidebar">
+  <div class="sidebar-header">Explorer</div>
+  <nav class="sidebar-nav">
+    <ul>
+      <li class="folder"><span>📁 content</span></li>
+      {{ range .Site.Menus.main }}
+      <li class="indent"><a href="{{ .URL }}">{{ .Name }}</a></li>
+      {{ end }}
+      {{ $currentPage := . }}
+      {{ range .Site.RegularPages }}
+      <li class="indent{{ if eq $currentPage . }} active{{ end }}">
+        <a href="{{ .RelPermalink }}">📄 {{ .Title }}</a>
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
+</aside>

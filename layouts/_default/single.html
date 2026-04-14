@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="tabs">
+  <div class="tab active">📄 {{ .Title }}.md</div>
+</div>
+<div class="editor">
+  <div class="editor-content">
+    <div class="breadcrumb"><span>{{ .Section | default "content" }}</span> > <span>{{ .Title }}.md</span></div>
+    <h1>{{ .Title }}</h1>
+    <div class="meta">
+      <span>🗓 {{ .Date.Format "2006-01-02" }}</span>
+      {{ if .Params.author }}<span>✍️ {{ .Params.author }}</span>{{ end }}
+      {{ range .Params.tags }}
+      <span class="tag">#{{ . }}</span>
+      {{ end }}
+    </div>
+    {{ .Content }}
+  </div>
+</div>
+{{ end }}

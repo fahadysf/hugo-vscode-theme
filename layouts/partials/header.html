@@ -1,0 +1,9 @@
+<header class="app-header">
+  <div class="left">
+    <button @click="sidebarOpen = !sidebarOpen; setCookie('hugo_vscode_sidebar', sidebarOpen ? '1' : '0')" title="Toggle Sidebar">☰</button>
+    <span class="title">{{ .Site.Title }}</span>
+  </div>
+  <div class="right">
+    <span>{{ .Title | default "Welcome" }}</span>
+  </div>
+</header>

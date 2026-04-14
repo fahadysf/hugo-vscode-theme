@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="tabs">
+  <div class="tab active">📄 README.md</div>
+</div>
+<div class="editor">
+  <div class="editor-content">
+    <div class="breadcrumb"><span>home</span> > <span>README.md</span></div>
+    <h1>{{ .Site.Title }}</h1>
+    <p>{{ .Site.Params.description | default "Welcome to the site." }}</p>
+    <hr>
+    <h2>Recent Posts</h2>
+    {{ range .Site.RegularPages }}
+    <article style="margin-bottom: 1.5em;">
+      <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+      <div class="meta">
+        <span>{{ .Date.Format "2006-01-02" }}</span>
+        {{ range .Params.tags }}
+        <span class="tag">#{{ . }}</span>
+        {{ end }}
+      </div>
+      <p>{{ .Summary | plainify | truncate 200 }}</p>
+    </article>
+    {{ else }}
+    <p>No posts yet. Run <code>hugo new content posts/hello.md</code> to get started.</p>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

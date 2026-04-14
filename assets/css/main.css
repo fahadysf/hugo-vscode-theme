@@ -1,0 +1,432 @@
+/* Ayu Dark Palette Variables */
+:root {
+  /* Core Ayu Dark colors */
+  --ayu-bg: #0D1017;
+  --ayu-editor-bg: #10141C;
+  --ayu-line: #161A24;
+  --ayu-border: #1B1F29;
+  --ayu-panel-bg: #141821;
+  --ayu-fg: #BFBDB6;
+  --ayu-ui-fg: #555E73;
+  --ayu-gutter: #6C7380;
+  --ayu-accent: #E6B450;
+  --ayu-accent-on: #805600;
+  --ayu-error: #D95757;
+  --ayu-tag: #39BAE6;
+  --ayu-func: #FFB454;
+  --ayu-entity: #59C2FF;
+  --ayu-string: #AAD94C;
+  --ayu-keyword: #FF8F40;
+  --ayu-constant: #D2A6FF;
+  --ayu-selection-active: rgba(51, 136, 255, 0.25);
+  --ayu-selection-ui: rgba(71, 82, 102, 0.25);
+
+  /* Layout */
+  --font-family: 'JetBrains Mono', monospace;
+  --sidebar-width: 260px;
+  --header-height: 32px;
+  --status-height: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 1.6;
+  background: var(--ayu-bg);
+  color: var(--ayu-fg);
+  overflow: hidden;
+}
+
+a {
+  color: var(--ayu-entity);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--ayu-accent);
+  text-decoration: underline;
+}
+
+/* App Shell */
+.app {
+  display: grid;
+  grid-template-rows: var(--header-height) 1fr var(--status-height);
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "status status";
+  height: 100vh;
+  width: 100vw;
+}
+
+.app.sidebar-closed {
+  grid-template-columns: 0 1fr;
+}
+
+/* Header / Title Bar */
+.app-header {
+  grid-area: header;
+  background: var(--ayu-bg);
+  border-bottom: 1px solid var(--ayu-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-size: 12px;
+  color: var(--ayu-ui-fg);
+  user-select: none;
+}
+
+.app-header .left,
+.app-header .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-header .title {
+  color: var(--ayu-fg);
+  font-weight: 600;
+}
+
+.app-header button {
+  background: transparent;
+  border: none;
+  color: var(--ayu-ui-fg);
+  cursor: pointer;
+  padding: 2px 6px;
+  font-family: inherit;
+  font-size: 12px;
+  border-radius: 3px;
+}
+.app-header button:hover {
+  background: var(--ayu-selection-ui);
+  color: var(--ayu-fg);
+}
+
+/* Sidebar (Explorer) */
+.app-sidebar {
+  grid-area: sidebar;
+  background: var(--ayu-bg);
+  border-right: 1px solid var(--ayu-border);
+  width: var(--sidebar-width);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ayu-ui-fg);
+  border-bottom: 1px solid var(--ayu-border);
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 6px 0;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-nav li a,
+.sidebar-nav li span {
+  display: block;
+  padding: 4px 18px;
+  font-size: 13px;
+  color: var(--ayu-fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-nav li a:hover {
+  background: var(--ayu-selection-ui);
+  text-decoration: none;
+}
+
+.sidebar-nav li.active > a {
+  background: var(--ayu-selection-active);
+  color: var(--ayu-accent);
+}
+
+.sidebar-nav .folder {
+  color: var(--ayu-ui-fg);
+  font-weight: 600;
+}
+
+.sidebar-nav .indent {
+  padding-left: 28px;
+}
+
+/* Main Editor Area */
+.app-main {
+  grid-area: main;
+  background: var(--ayu-editor-bg);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  background: var(--ayu-bg);
+  border-bottom: 1px solid var(--ayu-border);
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 6px 14px;
+  font-size: 12px;
+  color: var(--ayu-ui-fg);
+  border-right: 1px solid var(--ayu-border);
+  background: var(--ayu-bg);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: var(--ayu-editor-bg);
+  color: var(--ayu-fg);
+  border-top: 1px solid var(--ayu-accent);
+}
+
+/* Editor Content */
+.editor {
+  flex: 1;
+  overflow: auto;
+  padding: 24px 36px;
+}
+
+.editor-content {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* Typography within editor */
+.editor-content h1,
+.editor-content h2,
+.editor-content h3,
+.editor-content h4 {
+  font-weight: 600;
+  margin: 1.4em 0 0.6em;
+  color: var(--ayu-fg);
+}
+
+.editor-content h1 { font-size: 1.6em; border-bottom: 1px solid var(--ayu-border); padding-bottom: .3em; }
+.editor-content h2 { font-size: 1.35em; }
+.editor-content h3 { font-size: 1.15em; color: var(--ayu-accent); }
+.editor-content p { margin: 0.8em 0; }
+
+.editor-content ul,
+.editor-content ol {
+  padding-left: 1.6em;
+  margin: 0.6em 0;
+}
+
+.editor-content li::marker {
+  color: var(--ayu-ui-fg);
+}
+
+.editor-content code {
+  background: var(--ayu-panel-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.92em;
+  color: var(--ayu-string);
+}
+
+.editor-content pre {
+  background: var(--ayu-panel-bg);
+  padding: 14px 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.5;
+  border: 1px solid var(--ayu-border);
+}
+
+.editor-content pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+.editor-content blockquote {
+  margin: 1em 0;
+  padding: 8px 16px;
+  border-left: 3px solid var(--ayu-accent);
+  background: var(--ayu-line);
+  color: var(--ayu-fg);
+}
+
+.editor-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid var(--ayu-border);
+}
+
+.editor-content hr {
+  border: none;
+  border-top: 1px solid var(--ayu-border);
+  margin: 1.6em 0;
+}
+
+.editor-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 13px;
+}
+
+.editor-content th,
+.editor-content td {
+  border: 1px solid var(--ayu-border);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.editor-content th {
+  background: var(--ayu-panel-bg);
+  font-weight: 600;
+}
+
+.editor-content tr:nth-child(even) {
+  background: rgba(22, 26, 36, 0.5);
+}
+
+/* Tags / meta */
+.meta {
+  font-size: 12px;
+  color: var(--ayu-ui-fg);
+  margin-bottom: 18px;
+}
+
+.meta .tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: var(--ayu-panel-bg);
+  border: 1px solid var(--ayu-border);
+  margin-right: 6px;
+  color: var(--ayu-tag);
+}
+
+/* Status Bar */
+.app-status {
+  grid-area: status;
+  background: var(--ayu-accent);
+  color: var(--ayu-accent-on);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  user-select: none;
+}
+
+.app-status .left,
+.app-status .right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.app-status a {
+  color: var(--ayu-accent-on);
+}
+
+.app-status select {
+  background: var(--ayu-bg);
+  color: var(--ayu-fg);
+  border: 1px solid var(--ayu-border);
+  font-family: inherit;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: 12px;
+  color: var(--ayu-ui-fg);
+  margin-bottom: 14px;
+}
+
+.breadcrumb span {
+  color: var(--ayu-gutter);
+}
+
+/* Tooltip */
+[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  background: var(--ayu-panel-bg);
+  color: var(--ayu-fg);
+  border: 1px solid var(--ayu-border);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  white-space: nowrap;
+  z-index: 100;
+  margin-top: 18px;
+  margin-left: -10px;
+  pointer-events: none;
+}
+
+/* Scrollbars (WebKit) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ayu-border);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ayu-gutter);
+}
+
+/* Mobile */
+@media (max-width: 720px) {
+  .app-sidebar {
+    position: absolute;
+    left: 0;
+    top: var(--header-height);
+    bottom: var(--status-height);
+    z-index: 50;
+    transform: translateX(0);
+    transition: transform 0.15s ease;
+  }
+  .app.sidebar-closed .app-sidebar {
+    transform: translateX(-100%);
+  }
+  .editor {
+    padding: 16px;
+  }
+}

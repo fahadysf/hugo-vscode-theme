@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <div id="app"
+       class="app"
+       :class="{ 'sidebar-closed': !sidebarOpen }"
+       x-data="vscodeApp()"
+       x-init="initApp()">
+    {{ partial "header.html" . }}
+    {{ partial "sidebar.html" . }}
+    <main class="app-main">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+  </div>
+  {{ $alpine := resources.Get "js/alpine.min.js" }}
+  <script src="{{ $alpine.RelPermalink }}" defer></script>
+  <script>
+    function vscodeApp() {
+      return {
+        sidebarOpen: true,
+        fontFamily: 'JetBrains Mono',
+        initApp() {
+          const sb = this.getCookie('hugo_vscode_sidebar');
+          this.sidebarOpen = sb === '' ? true : sb === '1';
+          const f = this.getCookie('hugo_vscode_font');
+          this.fontFamily = f || 'JetBrains Mono';
+          this.setFont(this.fontFamily);
+        },
+        getCookie(name) {
+          const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+          return v ? v.pop() : '';
+        },
+        setCookie(name, value, days = 365) {
+          const d = new Date();
+          d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+          document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + d.toUTCString() + ';path=/';
+        },
+        setFont(font) {
+          this.fontFamily = font;
+          document.documentElement.style.setProperty('--font-family', "'" + font + "', monospace");
+          this.setCookie('hugo_vscode_font', font);
+        }
+      };
+    }
+  </script>
+</body>
+</html>
