@@ -47,5 +47,40 @@
       };
     }
   </script>
+  {{ if .HasShortcode "mermaid" }}
+  <style>.mermaid { opacity: 0; transition: opacity 0.3s ease; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'loose',
+      theme: 'dark',
+      fontFamily: 'Inter, system-ui, sans-serif',
+      themeVariables: {
+        fontSize: '14px',
+        primaryColor: '#1a3a4a',
+        primaryTextColor: '#e0e0e0',
+        primaryBorderColor: '#42a5f5',
+        lineColor: '#78909c',
+        secondaryColor: '#2e3b2e',
+        tertiaryColor: '#3a2a1a',
+        clusterBkg: '#2a2a2a',
+        clusterBorder: '#555'
+      }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+      mermaid.run().then(function() {
+        document.querySelectorAll('.mermaid').forEach(function(el) { el.style.opacity = '1'; });
+      });
+    });
+  </script>
+  {{ end }}
+  {{ range .Site.Params.customJS }}
+  {{ $custom := resources.Get . }}
+  {{ if $custom }}
+  {{ $customJS := $custom | minify | fingerprint }}
+  <script src="{{ $customJS.RelPermalink }}"></script>
+  {{ end }}
+  {{ end }}
 </body>
 </html>

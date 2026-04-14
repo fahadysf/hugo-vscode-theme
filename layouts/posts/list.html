@@ -1,16 +1,15 @@
 {{ define "main" }}
 <div class="tabs">
-  <div class="tab active">📄 README.md</div>
+  <div class="tab active">📄 Blog.md</div>
 </div>
 <div class="editor">
   <div class="editor-content">
-    <div class="breadcrumb"><span>home</span> > <span>README.md</span></div>
-    <h1>{{ .Site.Title }}</h1>
-    <p>{{ .Site.Params.description | default "Welcome to the site." }}</p>
+    <div class="breadcrumb"><span>content</span> > <span>Blog.md</span></div>
+    <h1>Blog</h1>
+    <p>All posts published on {{ .Site.Title }}.</p>
     <hr>
-    <h2>Recent Posts</h2>
-    {{ range first 10 .Site.RegularPages }}
-    <article style="margin-bottom: 1.5em;">
+    {{ range .Pages }}
+    <article style="margin-bottom: 2em;">
       <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
       <div class="meta">
         <span>🗓 {{ .Date.Format "2006-01-02" }}</span>
@@ -22,14 +21,12 @@
         <a class="tag" href="{{ "/categories/" | relURL }}{{ . | urlize }}">📁 {{ . }}</a>
         {{ end }}
       </div>
-      <p>{{ .Summary | plainify | truncate 200 }}</p>
+      <p>{{ .Summary | plainify | truncate 260 }}</p>
     </article>
     {{ else }}
-    <p>No posts yet. Add content to get started.</p>
+    <p>No posts yet.</p>
     {{ end }}
-    {{ if gt (len .Site.RegularPages) 10 }}
-    <p><a href="{{ "/posts/" | relURL }}">View all posts →</a></p>
-    {{ end }}
+    {{ template "_internal/pagination.html" . }}
   </div>
 </div>
 {{ end }}

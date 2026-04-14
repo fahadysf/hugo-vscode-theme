@@ -1,0 +1,17 @@
+{{ define "main" }}
+<div class="tabs">
+  <div class="tab active">📄 {{ .Title }}.md</div>
+</div>
+<div class="editor">
+  <div class="editor-content">
+    <div class="breadcrumb"><span>{{ .Data.Plural }}</span> > <span>{{ .Title }}.md</span></div>
+    <h1>{{ .Title }}</h1>
+    <p>Posts tagged with <strong>{{ .Title }}</strong>.</p>
+    <ul>
+      {{ range .Pages }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <span class="meta">— {{ .Date.Format "2006-01-02" }}</span></li>
+      {{ end }}
+    </ul>
+  </div>
+</div>
+{{ end }}

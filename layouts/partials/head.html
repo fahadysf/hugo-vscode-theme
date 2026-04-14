@@ -7,6 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..800&family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet">
 {{ $css := resources.Get "css/main.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{ range .Site.Params.customCSS }}
+{{ $custom := resources.Get . }}
+{{ if $custom }}
+{{ $customCSS := $custom | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $customCSS.RelPermalink }}">
+{{ end }}
+{{ end }}
 <script>
   (function(){
     function getCookie(n){var v=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)');return v?v.pop():'';}

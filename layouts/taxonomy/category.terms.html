@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="tabs">
+  <div class="tab active">📄 Categories.md</div>
+</div>
+<div class="editor">
+  <div class="editor-content">
+    <div class="breadcrumb"><span>taxonomies</span> > <span>Categories.md</span></div>
+    <h1>Categories</h1>
+    <ul class="taxonomy-list">
+      {{ range .Data.Terms.Alphabetical }}
+      <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span class="meta">({{ .Count }})</span></a></li>
+      {{ end }}
+    </ul>
+  </div>
+</div>
+{{ end }}

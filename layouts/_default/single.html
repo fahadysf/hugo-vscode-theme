@@ -10,7 +10,10 @@
       <span>🗓 {{ .Date.Format "2006-01-02" }}</span>
       {{ if .Params.author }}<span>✍️ {{ .Params.author }}</span>{{ end }}
       {{ range .Params.tags }}
-      <span class="tag">#{{ . }}</span>
+      <a class="tag" href="{{ "/tags/" | relURL }}{{ . | urlize }}">#{{ . }}</a>
+      {{ end }}
+      {{ range .Params.categories }}
+      <a class="tag" href="{{ "/categories/" | relURL }}{{ . | urlize }}">📁 {{ . }}</a>
       {{ end }}
     </div>
     {{ .Content }}

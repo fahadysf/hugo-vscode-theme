@@ -2,15 +2,22 @@
   <div class="sidebar-header">Explorer</div>
   <nav class="sidebar-nav">
     <ul>
-      <li class="folder"><span>📁 content</span></li>
-      {{ range .Site.Menus.main }}
-      <li class="indent"><a href="{{ .URL }}">{{ .Name }}</a></li>
-      {{ end }}
+      <li class="folder"><span>📁 {{ .Site.Title }}</span></li>
       {{ $currentPage := . }}
-      {{ range .Site.RegularPages }}
-      <li class="indent{{ if eq $currentPage . }} active{{ end }}">
+      {{ range .Site.Menus.main }}
+      <li class="indent{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{ else if eq $currentPage.RelPermalink .URL }} active{{ end }}">
+        <a href="{{ .URL }}">{{ .Name }}</a>
+      </li>
+      {{ end }}
+      {{ range .Site.Sections }}
+      <li class="indent{{ if eq $currentPage.Section .Name }} active{{ end }}">
+        <a href="{{ .RelPermalink }}">📂 {{ .Title | default (humanize .Name) }}</a>
+      </li>
+      {{ range .Pages }}
+      <li class="indent deeper{{ if eq $currentPage . }} active{{ end }}">
         <a href="{{ .RelPermalink }}">📄 {{ .Title }}</a>
       </li>
+      {{ end }}
       {{ end }}
     </ul>
   </nav>
