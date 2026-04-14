@@ -16,7 +16,7 @@ A Hugo static site / blog theme designed to look like **Visual Studio Code** usi
 ```bash
 # Add the theme to your Hugo site
 cd your-hugo-site
-git submodule add https://github.com/fahadysf/hugo-vscode-theme.git themes/hugo-vscode-theme
+git submodule add https://github.com/Fahad Yousuf <fahadysf@gmail.com>/hugo-vscode-theme.git themes/hugo-vscode-theme
 
 # Update config to use the theme
 echo 'theme = "hugo-vscode-theme"' >> hugo.toml
