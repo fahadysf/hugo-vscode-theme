@@ -286,6 +286,11 @@ a:hover {
   font-size: 1em;
 }
 
+.editor-content pre,
+.editor-content .highlight pre {
+  line-height: 1.35;
+}
+
 .editor-content blockquote {
   margin: 1em 0;
   padding: 8px 16px;
